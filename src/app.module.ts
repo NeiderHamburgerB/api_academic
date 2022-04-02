@@ -6,6 +6,8 @@ import { SesModule } from './config/aws/ses/ses.module'
 import { SnsModule } from './config/aws/sns/sns.module'
 import { DatabaseModule } from './config/database/database.module'
 import { EnvironmentModule } from './config/environments/environment.module'
+import { UserModule } from './routes/user/user.module';
+import { AuthModule } from './routes/auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { EnvironmentModule } from './config/environments/environment.module'
     S3Module,
     SesModule,
     SnsModule,
+    UserModule,
+    AuthModule,
     
 
 

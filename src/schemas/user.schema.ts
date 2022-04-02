@@ -1,0 +1,49 @@
+import { Schema, Types } from "mongoose"
+
+export const UserSchema = new Schema({
+
+   document:{
+       type:{
+           type:String
+       },
+       value:{
+           type:String
+       }
+   },
+   name:{
+       type:String
+   },
+   lastname:{
+       type:String
+   },
+   email:{
+       type:String
+   },
+   phone:{
+      prefix:{
+          type:String
+      },
+      number:{
+          type:String
+      }
+   },
+   password:{
+       type:String
+   },
+   image:{
+       type:String
+   },
+   roles:[{
+       type:String
+   }],
+   career:{
+       ref:'Career',
+       type:Types.ObjectId
+   },
+   current_semester:{
+       required:false,
+       type:Number
+   }
+},{
+    timestamps:true
+})
