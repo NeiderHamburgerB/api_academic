@@ -123,7 +123,7 @@ export class UserController {
         possession:'any',
         resource:AppResources.USER
     })
-    @Delete('delete')
+    @Delete('delete/:userId')
     async deleteUser(@Param('userId') userId:string, @User() user:IUser){
         if(this.rolesBuilder
             .can(user.roles)

@@ -11,6 +11,7 @@ import { AuthModule } from './routes/auth/auth.module';
 import { roles } from './app.roles'
 import { RolesModule } from './config/roles/roles.module'
 import { CareerModule } from './routes/career/career.module';
+import { SubjectModule } from './routes/subject/subject.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { CareerModule } from './routes/career/career.module';
     UserModule,
     AuthModule,
     RolesModule,
-    CareerModule
+    CareerModule,
+    SubjectModule
 
   ],
   controllers: [AppController],

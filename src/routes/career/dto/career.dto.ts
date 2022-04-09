@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
 import { IsArray, IsNumber, IsString } from "class-validator"
 
 export class CareerDto {
@@ -27,5 +27,34 @@ export class CareerDto {
     })
     subjects:string[]
 
+
+}
+
+
+export class CareerUpdateDto {
+
+    @IsString()
+    @ApiPropertyOptional({
+        type:String
+    })
+    name?:string
+
+    @IsNumber()
+    @ApiPropertyOptional({
+        type:Number
+    })
+    n_semesters?:number
+    
+    @IsString()
+    @ApiPropertyOptional({
+        type:String
+    })
+    program_director?:string
+
+    @IsArray()
+    @ApiPropertyOptional({
+        type:Array
+    })
+    subjects?:string[]
 
 }
