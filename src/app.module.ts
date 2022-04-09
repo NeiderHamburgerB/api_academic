@@ -8,6 +8,9 @@ import { DatabaseModule } from './config/database/database.module'
 import { EnvironmentModule } from './config/environments/environment.module'
 import { UserModule } from './routes/user/user.module';
 import { AuthModule } from './routes/auth/auth.module';
+import { roles } from './app.roles'
+import { RolesModule } from './config/roles/roles.module'
+import { CareerModule } from './routes/career/career.module';
 
 @Module({
   imports: [
@@ -18,8 +21,8 @@ import { AuthModule } from './routes/auth/auth.module';
     SnsModule,
     UserModule,
     AuthModule,
-    
-
+    RolesModule,
+    CareerModule
 
   ],
   controllers: [AppController],

@@ -6,7 +6,7 @@ export const CareerSchema = new Schema({
         type:String
     },
     n_semesters:{
-        type:String
+        type:Number
     },
     program_director:{
         type:String
@@ -18,5 +18,6 @@ export const CareerSchema = new Schema({
     }]
 
 },{
-    timestamps:true
+    timestamps:true,
+    versionKey:false
 })

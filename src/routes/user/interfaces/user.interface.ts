@@ -16,7 +16,7 @@ export interface IUser extends Document {
     password?:string
     image:string
     roles:string[]
-    career:string
+    career:string[]
     current_semester:number
 
 }

@@ -1,5 +1,5 @@
 import { Schema, Types } from "mongoose"
-import { Roles } from "src/app.roles"
+import { AppRoles } from "src/app.roles"
 
 export const UserSchema = new Schema({
 
@@ -36,17 +36,18 @@ export const UserSchema = new Schema({
    },
    roles:[{
        type:String,
-       enum: {values: Object.values(Roles) ,message:'Use an role valid'}
+       enum: {values: Object.values(AppRoles) ,message:'Use an role valid'}
    }],
-   career:{
+   career:[{
        ref:'Career',
        type:Types.ObjectId,
        required:false
-   },
+   }],
    current_semester:{
        required:false,
        type:Number
    }
 },{
-    timestamps:true
+    timestamps:true,
+    versionKey:false
 })

@@ -1,15 +1,19 @@
 import { Schema, Types } from "mongoose"
-
+enum status {
+    IN_PROGRESS = 'IN_PROGRESS',
+    PASSED = 'PASSED',
+    LOST = 'LOST'
+}
 export const SubjectSchema = new Schema({
 
     name:{
         type:String
     },
-    user:{
+    students:[{
         ref:'User',
         type:Types.ObjectId,
         required:false
-    },
+    }],
     schedule:[{
         day_week:{
             type:String
@@ -40,7 +44,10 @@ export const SubjectSchema = new Schema({
             type:String
         }
     }],
-    status:Boolean,
+    status:[{
+        type:String,
+        enum: { values: Object.values(status), message:'Use an status valid' }
+    }],
     homeworks:[{
         title:{
             type:String
@@ -56,5 +63,6 @@ export const SubjectSchema = new Schema({
         type:String
     }
 },{
-    timestamps:true
+    timestamps:true,
+    versionKey:false
 })
