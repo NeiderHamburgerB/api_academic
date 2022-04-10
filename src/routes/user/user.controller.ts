@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
+import { readFileSync } from 'fs'
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control'
 import { AppResources } from 'src/app.roles'
 import { Auth } from 'src/config/decorators/auth.decorator'
 import { User } from 'src/config/decorators/user.decorator'
-import { UserCreationDto, UserUpdateDto } from './dtos/user.dto'
+import { UserCreationDto, UserUpdateDto } from './dto/user.dto'
 import { IUser } from './interfaces/user.interface'
 import { UserService } from './user.service'
 
@@ -116,6 +118,22 @@ export class UserController {
                   }else{
                     return await this.UserService.updateUser(userId, data, user)
                   }
+    }
+
+    @Auth({
+        action:'update',
+        possession:'own',
+        resource:AppResources.USER
+    })
+    @ApiOperation({
+        summary:'Update img user'
+    })
+    @UseInterceptors(FileInterceptor('imgprofile'))
+    @Patch('update/image')
+    async updateImage(@User() user:IUser, @UploadedFile() file:any){
+        let buffer = readFileSync(file.path)
+        await this.UserService.updateImage(user,buffer)
+        return 'Image updated'
     }
 
     @Auth({

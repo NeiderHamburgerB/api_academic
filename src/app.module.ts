@@ -6,12 +6,12 @@ import { SesModule } from './config/aws/ses/ses.module'
 import { SnsModule } from './config/aws/sns/sns.module'
 import { DatabaseModule } from './config/database/database.module'
 import { EnvironmentModule } from './config/environments/environment.module'
-import { UserModule } from './routes/user/user.module';
-import { AuthModule } from './routes/auth/auth.module';
-import { roles } from './app.roles'
+import { UserModule } from './routes/user/user.module'
+import { AuthModule } from './routes/auth/auth.module'
 import { RolesModule } from './config/roles/roles.module'
-import { CareerModule } from './routes/career/career.module';
-import { SubjectModule } from './routes/subject/subject.module';
+import { CareerModule } from './routes/career/career.module'
+import { SubjectModule } from './routes/subject/subject.module'
+import { BillModule } from './routes/bill/bill.module'
 
 @Module({
   imports: [
@@ -24,7 +24,8 @@ import { SubjectModule } from './routes/subject/subject.module';
     AuthModule,
     RolesModule,
     CareerModule,
-    SubjectModule
+    SubjectModule,
+    BillModule
 
   ],
   controllers: [AppController],

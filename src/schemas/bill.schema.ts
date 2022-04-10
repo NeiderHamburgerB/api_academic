@@ -12,7 +12,7 @@ export const BillSchema = new Schema({
         type:String
     },
     total:{
-        type:String
+        type:Number
     }
 
 },{

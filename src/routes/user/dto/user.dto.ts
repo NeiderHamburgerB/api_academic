@@ -147,11 +147,6 @@ export class UserUpdateDto {
     })
     password?:string
     
-    @IsString()
-    @ApiPropertyOptional({
-        type:String
-    })
-    image?:string
     
     @IsArray()
     @ApiPropertyOptional({

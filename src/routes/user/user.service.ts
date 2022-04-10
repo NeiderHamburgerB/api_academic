@@ -1,14 +1,19 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { UserCreationDto, UserUpdateDto } from './dtos/user.dto'
+import { UserCreationDto, UserUpdateDto } from './dto/user.dto'
 import { IUser, IUserSearch } from './interfaces/user.interface'
 import { hashSync, genSaltSync } from 'bcryptjs'
+import { InjectS3, S3 } from 'nestjs-s3'
+import { ConfigService } from '@nestjs/config'
 
 @Injectable()
 export class UserService {
 
-    constructor(@InjectModel('User') private user:Model<IUser>){}
+    constructor(@InjectModel('User') private user:Model<IUser>,
+                @InjectS3() private s3:S3, 
+                private configService:ConfigService
+    ){}
 
     async getAll() : Promise<IUser[]>{
         return await this.user
@@ -74,6 +79,16 @@ export class UserService {
         await this.user.findByIdAndDelete(userId)
 
         return 'User Deleted'
+    }
+
+    async updateImage(user:IUser,file:Buffer){
+        let { Location  } = await this.s3.upload({
+            Bucket: this.configService.get('BUCKET_NAME'),
+            Key: `user/${user._id}/profile.jpg`,
+            Body:file
+        }).promise()
+
+        await this.user.findByIdAndUpdate(user._id, {image:Location})
     }
 
     async createUser(data:UserCreationDto) : Promise<string> {

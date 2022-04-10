@@ -43,8 +43,8 @@ export class SubjectService {
     }
 
     async createSubject(data:SubjectDto): Promise<string>{
-        const exists = await this.subject.find({$or:[{name:data.name}]}) 
-        if(!exists) throw new NotAcceptableException('Subject exists')
+        const exists = await this.subject.exists({$or:[{name:data.name}]}) 
+        if(exists) throw new NotAcceptableException('Subject exists')
         let register = await this.subject.create(data)
         register.save()
         return 'Subject created'
